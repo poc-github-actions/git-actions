@@ -39,4 +39,6 @@ jobs:
 
       - run: aws sts get-caller-identity # just an example. why not deploy something?
       - name: Run JIB build
-        run: mvn compile jib:build -Dimage=319690763435.dkr.ecr.us-west-2.amazonaws.com/gitactions
+#        run: mvn compile jib:build -Dimage=319690763435.dkr.ecr.us-west-2.amazonaws.com/gitactions
+        run: mvn compile jib:dockerBuild
+      - run: docker images
