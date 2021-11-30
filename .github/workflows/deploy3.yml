@@ -1,5 +1,6 @@
 name: Deploy3
 on:
+  workflow_dispatch:
   push:
 env:
   AWS_ROLE_ARN: arn:aws:iam::319690763435:role/AWSGithubRole
