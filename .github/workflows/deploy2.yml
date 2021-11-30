@@ -1,0 +1,18 @@
+name: Deploy2
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@b8c74de753fbcb4868bf2011fb2e15826ce973af
+        with:
+          aws-region: us-west-2
+          role-to-assume: arn:aws:iam::319690763435:role/AWSGithubRole
+          role-session-name: MySessionName
+      - run: aws sts get-caller-identity
