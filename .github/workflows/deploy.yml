@@ -15,13 +15,13 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: 11
-          distribution: 'adopt'
-          cache: maven
+#      - uses: actions/checkout@v2
+#      - name: Set up JDK 11
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: 11
+#          distribution: 'adopt'
+#          cache: maven
       - name: Set Environment Variables
         run: echo "REPO_NAME=${GITHUB_REPOSITORY#*\/}" >> $GITHUB_ENV
       - name: Get AWS Credentials Using OIDC
@@ -38,5 +38,5 @@ jobs:
           role-session-name: ${{ env.REPO_NAME }}-github-action
       - name: AWS Get Caller Identity
         run: aws sts get-caller-identity
-      - name: Run JIB build
-        run: mvn compile jib:build -Dimage=319690763435.dkr.ecr.us-west-2.amazonaws.com/gitactions
+#      - name: Run JIB build
+#        run: mvn compile jib:build -Dimage=319690763435.dkr.ecr.us-west-2.amazonaws.com/gitactions
