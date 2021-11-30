@@ -36,9 +36,12 @@ jobs:
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
           role-duration-seconds: 1800
           role-session-name: ${{ env.REPO_NAME }}-github-action
-
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
       - run: aws sts get-caller-identity # just an example. why not deploy something?
       - name: Run JIB build
 #        run: mvn compile jib:build -Dimage=319690763435.dkr.ecr.us-west-2.amazonaws.com/gitactions
         run: mvn compile jib:dockerBuild
-      - run: docker images
+      - run: docker tag git-actions:0.0.1-SNAPSHOT 319690763435.dkr.ecr.us-west-2.amazonaws.com/gitactions:0.0.1-SNAPSHOT
+      - run: docker push 319690763435.dkr.ecr.us-west-2.amazonaws.com/gitactions:0.0.1-SNAPSHOT
